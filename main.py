@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, scrolledtext
 import webbrowser
-
+import os
+import sys
 
 class ToolTip:
     #Инициализация
@@ -45,6 +46,11 @@ class TextProcessorEditor:
         self.filename = None
         self.saved_text = ""  # Для отслеживания сохраненного состояния
         self.modified = False
+        self.history = []
+        self.history_index = -1
+
+        self.text_area = None
+        self.output_area = None
 
         self.new_img = None
         self.open_img = None
@@ -67,11 +73,22 @@ class TextProcessorEditor:
         #Создание области ввода/редактирования текста
         self.create_text_area()
 
+
         #Создание области результатов (с запретом ввода)
         self.create_output_area()
-
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
+    @staticmethod
+    def resource_path(self, relative_path):
+        """Для корректной работы с PyInstaller"""
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
+
+    def on_text_modified(self, _event=None):
+        if self.text_area.edit_modified():
+            self.modified = True
+        self.text_area.edit_modified(False)
 
 
     def load_images(self):
@@ -191,8 +208,11 @@ class TextProcessorEditor:
 
 
     def new_file(self):
-        if self.check_unsaved_changes():
-            self.text_area.delete(1.0, tk.END)
+        if not self.check_unsaved_changes() or messagebox.askyesno(
+            "Новый файл",
+            "Сохранить изменения перед созданием нового файла?"
+        ):
+            self.text_area.delete("1.0", tk.END)
             self.filename = None
             self.saved_text = ""
             self.modified = False
@@ -200,7 +220,10 @@ class TextProcessorEditor:
             self.add_output("Создан новый документ")
 
     def open_file(self):
-        if not self.check_unsaved_changes():
+        if self.check_unsaved_changes() and not messagebox.askyesno(
+                "Открыть файл",
+                "Сохранить изменения перед открытием нового файла?"
+        ):
             return
 
         file_path = filedialog.askopenfilename(filetypes=[("Текстовые файлы", "*.txt"), ("Все файлы", "*.*")])
@@ -216,6 +239,7 @@ class TextProcessorEditor:
                 self.add_output(f"Документ открыт: {file_path}")
             except Exception as e:
                 messagebox.showerror("Ошибка", f"Не удалось открыть файл: {e}")
+
     def save_file(self):
         if self.filename:
             try:
@@ -240,6 +264,8 @@ class TextProcessorEditor:
                 with open(file_path, "w", encoding="utf-8") as file:
                     file.write(self.text_area.get("1.0", tk.END))
                 self.filename = file_path
+                self.saved_text = self.text_area.get("1.0", tk.END)
+                self.modified = False
                 self.add_output(f"Документ сохранен как: {file_path}")
             except Exception as e:
                 messagebox.showerror("Ошибка", f"Не удалось сохранить файл: {e}")
@@ -344,26 +370,25 @@ class TextProcessorEditor:
         self.add_output("Показана информация о программе")
 
     def check_unsaved_changes(self):
-        """Проверяет наличие несохраненных изменений и предлагает сохранить"""
+        """Проверяет наличие несохраненных изменений"""
         current_text = self.text_area.get("1.0", tk.END)
-        if self.modified or (self.saved_text != current_text):
-            response = messagebox.askyesnocancel(
-                "Несохраненные изменения",
-                "У вас есть несохраненные изменения. Хотите сохранить перед продолжением?"
-            )
-            if response is None:  # Нажата "Отмена"
-                return False
-            elif response:  # Нажата "Да"
-                self.save_file()
-                return True
-            else:  # Нажата "Нет"
-                return True
-        return True
+        return self.modified or (self.saved_text != current_text)
 
     def on_closing(self):
-        """Обработчик закрытия окна"""
-        if self.check_unsaved_changes():
+        if not self.check_unsaved_changes():
             self.root.destroy()
+            return
+
+        response = messagebox.askyesnocancel(
+            "Выход",
+            "Сохранить изменения перед выходом?"
+        )
+        if response is None:  # Отмена
+            return
+        elif response:  # Да
+            self.save_file()
+        self.root.destroy()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
