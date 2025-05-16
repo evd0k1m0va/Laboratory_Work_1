@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Руководство пользователя - Лексер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        .menu-section, .toolbar-section {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .hotkey {
+            background-color: #e0e0e0;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .note {
+            background-color: #fffde7;
+            padding: 10px;
+            border-left: 4px solid #ffd600;
+            margin: 10px 0;
+        }
+        img.icon {
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Руководство пользователя - Лексер</h1>
+
+        <section>
+            <h2>1. Введение</h2>
+            <p>Лексер - это приложение для работы с текстом и проведения лексического анализа. Программа предоставляет удобный интерфейс для редактирования текста и выполнения различных операций с ним.</p>
+        </section>
+
+        <section class="menu-section">
+            <h2>2. Меню программы</h2>
+
+            <h3>2.1. Меню "Файл"</h3>
+            <ul>
+                <li><strong>Создать</strong> (<span class="hotkey">Ctrl+N</span>) - создает новый документ</li>
+                <li><strong>Открыть</strong> (<span class="hotkey">Ctrl+O</span>) - открывает существующий файл</li>
+                <li><strong>Сохранить</strong> (<span class="hotkey">Ctrl+S</span>) - сохраняет текущий документ</li>
+                <li><strong>Сохранить как</strong> - сохраняет документ под новым именем</li>
+                <li><strong>Выход</strong> - закрывает программу</li>
+            </ul>
+
+            <div class="note">
+                <p>При попытке закрыть программу или открыть новый файл с несохраненными изменениями, система предложит сохранить текущий документ.</p>
+            </div>
+
+            <h3>2.2. Меню "Правка"</h3>
+            <ul>
+                <li><strong>Отменить</strong> (<span class="hotkey">Ctrl+Z</span>) - отменяет последнее действие</li>
+                <li><strong>Повторить</strong> (<span class="hotkey">Ctrl+Y</span>) - повторяет последнее отмененное действие</li>
+                <li><strong>Вырезать</strong> (<span class="hotkey">Ctrl+X</span>) - вырезает выделенный текст</li>
+                <li><strong>Копировать</strong> (<span class="hotkey">Ctrl+C</span>) - копирует выделенный текст</li>
+                <li><strong>Вставить</strong> (<span class="hotkey">Ctrl+V</span>) - вставляет текст из буфера обмена</li>
+                <li><strong>Удалить</strong> - удаляет выделенный текст</li>
+                <li><strong>Выделить все</strong> - выделяет весь текст в документе</li>
+            </ul>
+
+            <h3>2.3. Меню "Текст"</h3>
+            <p>Содержит разделы, которые будут реализованы в последующих версиях программы:</p>
+            <ul>
+                <li>Постановка задачи</li>
+                <li>Грамматика</li>
+                <li>Классификация грамматики</li>
+                <li>Метод анализа</li>
+                <li>Диагностика ошибок</li>
+                <li>Тестовый пример</li>
+                <li>Список литературы</li>
+                <li>Исходный код программы</li>
+            </ul>
+        </section>
+
+        <section class="toolbar-section">
+            <h2>3. Панель инструментов</h2>
+            <p>Панель инструментов содержит кнопки для быстрого доступа к часто используемым функциям:</p>
+
+            <ul>
+                <li><img src="new.png" class="icon" alt="Новый"> <strong>Новый</strong> - создает новый документ</li>
+                <li><img src="open.png" class="icon" alt="Открыть"> <strong>Открыть</strong> - открывает существующий файл</li>
+                <li><img src="save.png" class="icon" alt="Сохранить"> <strong>Сохранить</strong> - сохраняет текущий документ</li>
+                <li><img src="back.png" class="icon" alt="Назад"> <strong>Назад</strong> (<span class="hotkey">Alt+Left</span>) - отменяет последнее действие</li>
+                <li><img src="forward.png" class="icon" alt="Вперед"> <strong>Вперед</strong> (<span class="hotkey">Alt+Right</span>) - повторяет последнее отмененное действие</li>
+                <li><img src="cut.png" class="icon" alt="Вырезать"> <strong>Вырезать</strong> - вырезает выделенный текст</li>
+                <li><img src="copy.png" class="icon" alt="Копировать"> <strong>Копировать</strong> - копирует выделенный текст</li>
+                <li><img src="insert.png" class="icon" alt="Вставить"> <strong>Вставить</strong> - вставляет текст из буфера обмена</li>
+                <li><img src="play.png" class="icon" alt="Анализ"> <strong>Анализ</strong> (<span class="hotkey">F5</span>) - запускает лексический анализ</li>
+                <li><img src="balloon.png" class="icon" alt="Справка"> <strong>Справка</strong> (<span class="hotkey">F1</span>) - открывает это руководство</li>
+                <li><img src="property.png" class="icon" alt="О программе"> <strong>О программе</strong> - показывает информацию о программе</li>
+            </ul>
+
+            <div class="note">
+                <p>При наведении курсора на любую кнопку панели инструментов появляется всплывающая подсказка с описанием функции.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Рабочая область</h2>
+            <p>Программа имеет две основные области:</p>
+
+            <h3>4.1. Область редактирования</h3>
+            <p>Верхняя большая область предназначена для ввода и редактирования текста. Поддерживаются все стандартные операции работы с текстом.</p>
+
+            <h3>4.2. Область результатов</h3>
+            <p>Нижняя область отображает:</p>
+            <ul>
+                <li>Сообщения о выполненных операциях</li>
+                <li>Результаты лексического анализа</li>
+                <li>Другую служебную информацию</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Горячие клавиши</h2>
+            <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse:collapse;">
+                <tr>
+                    <th>Комбинация</th>
+                    <th>Действие</th>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+N</span></td>
+                    <td>Создать новый документ</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+O</span></td>
+                    <td>Открыть файл</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+S</span></td>
+                    <td>Сохранить текущий документ</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+Z</span></td>
+                    <td>Отменить последнее действие</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+Y</span></td>
+                    <td>Повторить последнее отмененное действие</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+X</span></td>
+                    <td>Вырезать выделенный текст</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+C</span></td>
+                    <td>Копировать выделенный текст</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">Ctrl+V</span></td>
+                    <td>Вставить текст из буфера обмена</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">F5</span></td>
+                    <td>Запустить лексический анализ</td>
+                </tr>
+                <tr>
+                    <td><span class="hotkey">F1</span></td>
+                    <td>Открыть справку</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>6. Поддержка</h2>
+            <p>По всем вопросам обращайтесь к разработчику: Анастасия Евдокимова</p>
+            <p>Версия программы: 1.0</p>
+        </section>
+    </div>
+</body>
+</html>
